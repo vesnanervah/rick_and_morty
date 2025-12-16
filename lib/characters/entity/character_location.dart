@@ -5,13 +5,12 @@ part 'character_location.g.dart';
 
 @JsonSerializable()
 final class CharacterLocation extends Equatable {
-  final int id;
-  final String? name;
+  final String name;
 
-  const CharacterLocation({required this.id, this.name});
+  const CharacterLocation({required this.name});
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [name];
 
   factory CharacterLocation.fromJson(Map<String, dynamic> json) =>
       _$CharacterLocationFromJson(json);
