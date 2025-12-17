@@ -22,13 +22,13 @@ final class FavoriteCharacterRepo extends CharacterRepo {
       if (localVal.isEmpty) {
         return FetchCharactersResult(pages: 0);
       }
-      final jsonList = jsonDecode(localVal) as List<Map<String, dynamic>>;
+      final jsonList = jsonDecode(localVal) as List<dynamic>;
       return FetchCharactersResult(
         pages: 0,
-        characters: jsonList.map(Character.fromJson).toList(),
+        characters: jsonList.map((json) => Character.fromJson(json)).toList(),
       );
-    } catch (_) {
-      box.delete(_valueKey);
+    } catch (e) {
+      await box.delete(_valueKey);
       return FetchCharactersResult(pages: 0);
     }
   }
@@ -38,6 +38,6 @@ final class FavoriteCharacterRepo extends CharacterRepo {
   Future<void> putCharacters(List<Character> characters) async {
     final box = await Hive.openBox(_boxKey);
     final minifiedCharacters = characters.map((elem) => elem.toJson()).toList();
-    box.put(_valueKey, jsonEncode(minifiedCharacters));
+    await box.put(_valueKey, jsonEncode(minifiedCharacters));
   }
 }

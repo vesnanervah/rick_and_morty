@@ -11,6 +11,7 @@ final class FavoriteCharactersBloc
   FavoriteCharactersBloc({required super.repo}) : super(CharactersState()) {
     on<NeededNextCharacters>(onNeededNextCharacters);
     on<ToggleFavoriteCharacters>(onAddToFavoriteCharacters);
+    add(NeededNextCharacters());
   }
 
   Future<void> onNeededNextCharacters(

@@ -12,7 +12,7 @@ import 'package:rick_and_morty/core/view/home_layout.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies(Environment.dev);
-  final path = await getTemporaryDirectory();
+  final path = await getApplicationCacheDirectory();
   Hive.init(path.path);
 
   runApp(const MainApp());
