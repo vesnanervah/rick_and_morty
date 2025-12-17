@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/characters/entity/character.dart';
+import 'package:rick_and_morty/characters/view/character_list_item_information_block.dart';
 import 'package:rick_and_morty/characters/view/characters_list_item_header.dart';
 import 'package:rick_and_morty/core/view/safe_image.dart';
 
@@ -27,6 +28,7 @@ class CharactersListItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Column(
+              spacing: 8,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CharactersListItemHeader(
@@ -34,6 +36,16 @@ class CharactersListItem extends StatelessWidget {
                   status: character.status,
                   species: character.species,
                 ),
+                if (character.origin?.name != null)
+                  CharacterListItemInformationBlock(
+                    label: "Origin location:",
+                    value: character.origin!.name,
+                  ),
+                if (character.location?.name != null)
+                  CharacterListItemInformationBlock(
+                    label: "Last known location:",
+                    value: character.location!.name,
+                  ),
               ],
             ),
           ),
