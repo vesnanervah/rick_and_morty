@@ -21,8 +21,9 @@ class CharactersListState extends State<CharactersList> {
   @override
   void initState() {
     super.initState();
+    widget.onReachedEnd();
     listController.addListener(() {
-      if (listController.position.pixels ==
+      if (listController.position.pixels >=
           listController.position.maxScrollExtent - 40) {
         widget.onReachedEnd();
       }
@@ -37,9 +38,12 @@ class CharactersListState extends State<CharactersList> {
 
   @override
   Widget build(BuildContext context) => ListView.builder(
+    padding: const EdgeInsets.all(16),
     itemCount: widget.characters.length,
     controller: listController,
-    itemBuilder: (_, index) =>
-        CharactersListItem(character: widget.characters[index]),
+    itemBuilder: (_, index) => Padding(
+      padding: index == 0 ? EdgeInsets.zero : const EdgeInsets.only(top: 16),
+      child: CharactersListItem(character: widget.characters[index]),
+    ),
   );
 }
