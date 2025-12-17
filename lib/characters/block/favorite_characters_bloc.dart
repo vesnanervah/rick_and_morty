@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty/characters/block/characters_bloc.dart';
 import 'package:rick_and_morty/characters/block/characters_event.dart';
 import 'package:rick_and_morty/characters/block/characters_state.dart';
 import 'package:rick_and_morty/characters/repository/favorite_character_repo.dart';
 
+@Injectable()
 final class FavoriteCharactersBloc
     extends CharactersBloc<CharactersState, FavoriteCharacterRepo> {
   FavoriteCharactersBloc({required super.repo}) : super(CharactersState()) {
@@ -36,16 +38,14 @@ final class FavoriteCharactersBloc
     AddToFavoriteCharacters event,
     Emitter<CharactersState> emit,
   ) async {
-    if (state.characters.contains(event.character)) {
-      // TODO(Zverev): delete operation
-      return;
-    }
+    final mutatedList =
+        (state.characters.contains(event.character)
+                ? state.characters.where((c) => c != event.character)
+                : [...state.characters, event.character])
+            .toList();
     try {
-      final mutatedList = [...state.characters, event.character];
       repo.putCharacters(mutatedList);
       emit(state.copyWith(characters: mutatedList));
-    } catch (_) {
-      emit(state);
-    }
+    } catch (_) {}
   }
 }
