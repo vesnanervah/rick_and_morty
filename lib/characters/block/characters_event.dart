@@ -6,8 +6,8 @@ sealed class CharactersEvent {
 
 final class NeededNextCharacters extends CharactersEvent {}
 
-final class AddToFavoriteCharacters extends CharactersEvent {
+final class ToggleFavoriteCharacters extends CharactersEvent {
   final Character character;
 
-  const AddToFavoriteCharacters(this.character);
+  const ToggleFavoriteCharacters(this.character);
 }

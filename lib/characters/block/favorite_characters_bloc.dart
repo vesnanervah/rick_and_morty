@@ -10,7 +10,7 @@ final class FavoriteCharactersBloc
     extends CharactersBloc<CharactersState, FavoriteCharacterRepo> {
   FavoriteCharactersBloc({required super.repo}) : super(CharactersState()) {
     on<NeededNextCharacters>(onNeededNextCharacters);
-    on<AddToFavoriteCharacters>(onAddToFavoriteCharacters);
+    on<ToggleFavoriteCharacters>(onAddToFavoriteCharacters);
   }
 
   Future<void> onNeededNextCharacters(
@@ -35,7 +35,7 @@ final class FavoriteCharactersBloc
   }
 
   Future<void> onAddToFavoriteCharacters(
-    AddToFavoriteCharacters event,
+    ToggleFavoriteCharacters event,
     Emitter<CharactersState> emit,
   ) async {
     final mutatedList =

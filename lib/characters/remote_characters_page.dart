@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/characters/block/characters_event.dart';
 import 'package:rick_and_morty/characters/block/remote_characters_bloc.dart';
 import 'package:rick_and_morty/characters/block/remote_characters_state.dart';
-import 'package:rick_and_morty/characters/view/characters_list.dart';
+import 'package:rick_and_morty/characters/view/remote_characters_list.dart';
 
 class RemoteCharactersPage extends StatelessWidget {
   const RemoteCharactersPage({super.key});
@@ -11,7 +11,8 @@ class RemoteCharactersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<RemoteCharactersBloc, RemoteCharactersState>(
-        builder: (context, state) => CharactersList(
+        buildWhen: (previous, current) => previous != current,
+        builder: (context, state) => RemoteCharactersList(
           characters: state.characters,
           onReachedEnd: () => onReachedEnd(state, context),
         ),

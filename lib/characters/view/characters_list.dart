@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/characters/entity/character.dart';
-import 'package:rick_and_morty/characters/view/characters_list_item.dart';
 
-class CharactersList extends StatefulWidget {
+abstract class CharactersList extends StatefulWidget {
   final List<Character> characters;
   final VoidCallback onReachedEnd;
   const CharactersList({
@@ -10,12 +9,9 @@ class CharactersList extends StatefulWidget {
     required this.onReachedEnd,
     super.key,
   });
-
-  @override
-  State<StatefulWidget> createState() => CharactersListState();
 }
 
-class CharactersListState extends State<CharactersList> {
+abstract class CharactersListState extends State<CharactersList> {
   final listController = ScrollController();
 
   @override
@@ -41,9 +37,13 @@ class CharactersListState extends State<CharactersList> {
     padding: const EdgeInsets.all(16),
     itemCount: widget.characters.length,
     controller: listController,
-    itemBuilder: (_, index) => Padding(
-      padding: index == 0 ? EdgeInsets.zero : const EdgeInsets.only(top: 16),
-      child: CharactersListItem(character: widget.characters[index]),
-    ),
+    itemBuilder: (_, index) {
+      return Padding(
+        padding: index == 0 ? EdgeInsets.zero : const EdgeInsets.only(top: 16),
+        child: buildListItem(index),
+      );
+    },
   );
+
+  Widget buildListItem(index);
 }
