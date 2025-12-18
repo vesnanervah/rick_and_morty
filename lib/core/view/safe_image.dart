@@ -18,8 +18,8 @@ class SafeImage extends StatelessWidget {
       width: width,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) => placeholder(),
-      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) =>
-          wasSynchronouslyLoaded ? child : placeholder(),
+      loadingBuilder: (_, child, progress) =>
+          progress == null ? child : placeholder(),
     );
   }
 

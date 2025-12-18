@@ -48,6 +48,7 @@ abstract class CharactersListState extends State<CharactersList> {
       controller: listController,
       itemBuilder: (_, index) {
         return Padding(
+          key: ValueKey(widget.characters[index].id),
           padding: index == 0
               ? EdgeInsets.zero
               : const EdgeInsets.only(top: 16),
