@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/characters/entity/character.dart';
 
 abstract class CharactersList extends StatefulWidget {
+  final bool isLoading;
   final List<Character> characters;
   final VoidCallback onReachedEnd;
   const CharactersList({
     required this.characters,
     required this.onReachedEnd,
+    required this.isLoading,
     super.key,
   });
 }
@@ -33,17 +35,27 @@ abstract class CharactersListState extends State<CharactersList> {
   }
 
   @override
-  Widget build(BuildContext context) => ListView.builder(
-    padding: const EdgeInsets.all(16),
-    itemCount: widget.characters.length,
-    controller: listController,
-    itemBuilder: (_, index) {
-      return Padding(
-        padding: index == 0 ? EdgeInsets.zero : const EdgeInsets.only(top: 16),
-        child: buildListItem(index),
-      );
-    },
-  );
+  Widget build(BuildContext context) {
+    if (widget.characters.isEmpty && !widget.isLoading) {
+      return Center(child: Text("Список пуст"));
+    }
+    if (widget.characters.isEmpty) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: widget.characters.length,
+      controller: listController,
+      itemBuilder: (_, index) {
+        return Padding(
+          padding: index == 0
+              ? EdgeInsets.zero
+              : const EdgeInsets.only(top: 16),
+          child: buildListItem(index),
+        );
+      },
+    );
+  }
 
   Widget buildListItem(index);
 }

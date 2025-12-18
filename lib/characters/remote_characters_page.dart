@@ -13,6 +13,7 @@ class RemoteCharactersPage extends StatelessWidget {
       BlocBuilder<RemoteCharactersBloc, RemoteCharactersState>(
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) => RemoteCharactersList(
+          isLoading: state.isFetchingMore,
           characters: state.characters,
           onReachedEnd: () => onReachedEnd(state, context),
         ),

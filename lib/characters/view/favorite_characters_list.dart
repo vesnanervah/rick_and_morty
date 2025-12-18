@@ -6,6 +6,7 @@ class FavoriteCharactersList extends CharactersList {
   const FavoriteCharactersList({
     required super.characters,
     required super.onReachedEnd,
+    required super.isLoading,
     super.key,
   });
 

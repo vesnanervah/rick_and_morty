@@ -6,6 +6,7 @@ class RemoteCharactersList extends CharactersList {
   const RemoteCharactersList({
     required super.characters,
     required super.onReachedEnd,
+    required super.isLoading,
     super.key,
   });
 
