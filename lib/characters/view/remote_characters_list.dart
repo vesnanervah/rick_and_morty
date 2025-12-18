@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty/characters/view/animated_remote_characters_list_item.dart';
 import 'package:rick_and_morty/characters/view/characters_list.dart';
-import 'package:rick_and_morty/characters/view/remote_characters_list_item.dart';
 
 class RemoteCharactersList extends CharactersList {
   const RemoteCharactersList({
@@ -16,5 +16,5 @@ class RemoteCharactersList extends CharactersList {
 class RemoteCharactersListState extends CharactersListState {
   @override
   Widget buildListItem(index) =>
-      RemoteCharactersListItem(character: widget.characters[index]);
+      AnimatedRemoteCharactersListItem(character: widget.characters[index]);
 }

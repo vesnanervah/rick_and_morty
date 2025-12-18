@@ -8,19 +8,30 @@ import 'package:rick_and_morty/characters/view/toggle_favorites_characters_butto
 
 class BlocWrapedToggleFavoritesButton extends StatelessWidget {
   final Character character;
+  final void Function(bool wasFavorite)? onFavoriteChangeCb;
 
-  const BlocWrapedToggleFavoritesButton({required this.character, super.key});
+  const BlocWrapedToggleFavoritesButton({
+    required this.character,
+    this.onFavoriteChangeCb,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<FavoriteCharactersBloc, CharactersState>(
         buildWhen: (previous, current) =>
             previous.characters != current.characters,
-        builder: (context, state) => ToggleFavoritesCharactersButton(
-          isFavorite: state.characters.contains(character),
-          onTap: () => context.read<FavoriteCharactersBloc>().add(
-            ToggleFavoriteCharacters(character),
-          ),
-        ),
+        builder: (context, state) {
+          final isFavorite = state.characters.contains(character);
+          return ToggleFavoritesCharactersButton(
+            isFavorite: isFavorite,
+            onTap: () {
+              onFavoriteChangeCb?.call(isFavorite);
+              context.read<FavoriteCharactersBloc>().add(
+                ToggleFavoriteCharacters(character),
+              );
+            },
+          );
+        },
       );
 }
