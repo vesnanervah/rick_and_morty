@@ -17,9 +17,8 @@ class CharactersListItemHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
-    spacing: 4,
     children: [
-      Text(name, style: Theme.of(context).textTheme.headlineSmall),
+      Text(name, style: Theme.of(context).textTheme.titleMedium),
       Row(
         children: [
           CharacterStatusIndicator(status),

@@ -20,37 +20,44 @@ abstract class CharactersListItem extends StatelessWidget {
             aspectRatio: 4 / 4,
             child: SafeImage(url: character.image),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  CharactersListItemHeader(
-                    name: character.name ?? "Character",
-                    status: character.status,
-                    species: character.species,
+          Flexible(
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
                   ),
-                  if (character.origin?.name != null)
-                    CharacterListItemInformationBlock(
-                      label: "Origin location:",
-                      value: character.origin!.name,
-                    ),
-                  if (character.location?.name != null)
-                    CharacterListItemInformationBlock(
-                      label: "Last known location:",
-                      value: character.location!.name,
-                    ),
-                ],
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: buildToggleFavoriteButton(context),
+                  child: Column(
+                    spacing: 8,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      CharactersListItemHeader(
+                        name: character.name ?? "Character",
+                        status: character.status,
+                        species: character.species,
+                      ),
+                      if (character.origin?.name != null)
+                        CharacterListItemInformationBlock(
+                          label: "Origin location:",
+                          value: character.origin!.name,
+                        ),
+                      if (character.location?.name != null)
+                        CharacterListItemInformationBlock(
+                          label: "Last known location:",
+                          value: character.location!.name,
+                        ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: buildToggleFavoriteButton(context),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
