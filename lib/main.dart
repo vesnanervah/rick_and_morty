@@ -18,8 +18,15 @@ void main() async {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  ThemeMode themeMode = ThemeMode.light;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,20 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<RemoteCharactersBloc>()),
         BlocProvider(create: (_) => getIt<FavoriteCharactersBloc>()),
       ],
-      child: const MaterialApp(home: HomeLayout()),
+      child: MaterialApp(
+        home: HomeLayout(theme: themeMode, onChangeThemeTap: changeTheme),
+        darkTheme: ThemeData.dark(),
+        themeMode: themeMode,
+      ),
     );
+  }
+
+  void changeTheme() {
+    final theme = themeMode == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
+    setState(() {
+      themeMode = theme;
+    });
   }
 }
