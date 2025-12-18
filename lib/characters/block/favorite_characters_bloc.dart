@@ -49,11 +49,7 @@ final class FavoriteCharactersBloc
         emit(state.copyWith(characters: mutatedList));
       } catch (_) {}
     } else {
-      final mutatedList =
-          (state.characters.contains(event.character)
-                  ? state.characters.where((c) => c != event.character)
-                  : [...state.characters, event.character])
-              .toList();
+      final mutatedList = [...state.characters, event.character];
       try {
         repo.putCharacter(event.character);
         emit(state.copyWith(characters: mutatedList));
