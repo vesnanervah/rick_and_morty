@@ -10,7 +10,7 @@ final class FavoriteCharactersBloc
     extends CharactersBloc<CharactersState, FavoriteCharacterRepo> {
   FavoriteCharactersBloc({required super.repo}) : super(CharactersState()) {
     on<NeededNextCharacters>(onNeededNextCharacters);
-    on<ToggleFavoriteCharacters>(onAddToFavoriteCharacters);
+    on<ToggleFavoriteCharacters>(onToggleFavoriteCharacters);
     add(NeededNextCharacters());
   }
 
@@ -35,18 +35,29 @@ final class FavoriteCharactersBloc
     }
   }
 
-  Future<void> onAddToFavoriteCharacters(
+  Future<void> onToggleFavoriteCharacters(
     ToggleFavoriteCharacters event,
     Emitter<CharactersState> emit,
   ) async {
-    final mutatedList =
-        (state.characters.contains(event.character)
-                ? state.characters.where((c) => c != event.character)
-                : [...state.characters, event.character])
+    final hasCharacter = state.characters.contains(event.character);
+    if (hasCharacter) {
+      try {
+        final mutatedList = state.characters
+            .where((c) => c != event.character)
             .toList();
-    try {
-      repo.putCharacter(event.character);
-      emit(state.copyWith(characters: mutatedList));
-    } catch (_) {}
+        repo.deleteCharacter(event.character);
+        emit(state.copyWith(characters: mutatedList));
+      } catch (_) {}
+    } else {
+      final mutatedList =
+          (state.characters.contains(event.character)
+                  ? state.characters.where((c) => c != event.character)
+                  : [...state.characters, event.character])
+              .toList();
+      try {
+        repo.putCharacter(event.character);
+        emit(state.copyWith(characters: mutatedList));
+      } catch (_) {}
+    }
   }
 }

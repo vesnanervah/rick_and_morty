@@ -20,8 +20,13 @@ final class FavoriteCharacterRepo extends CharacterRepo {
     }
   }
 
-  Future<void> putCharacter(Character characters) async {
+  Future<void> putCharacter(Character character) async {
     final box = await Hive.openBox<Character>(_boxKey);
-    await box.add(characters);
+    await box.add(character);
+  }
+
+  Future<void> deleteCharacter(Character character) async {
+    final box = await Hive.openBox<Character>(_boxKey);
+    await box.deleteAt(box.values.toList().indexOf(character));
   }
 }
