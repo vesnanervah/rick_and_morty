@@ -18,7 +18,6 @@ class RemoteCharactersPage extends StatelessWidget {
         ),
       );
 
-  // TODO(Zverev): handle copypast
   void onReachedEnd(RemoteCharactersState state, BuildContext context) {
     if (!state.isFetchingMore && state.hasMore) {
       context.read<RemoteCharactersBloc>().add(NeededNextCharacters());

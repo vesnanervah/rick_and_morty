@@ -1,3 +1,42 @@
 # rick_and_morty
 
-A new Flutter project.
+Приложение, позволяющее смотреть персонажей вселенной Рика и Морти
+благодаря [Rick and Morty API](https://rickandmortyapi.com/).
+
+Умеет кешировать запросы, менять тему, сохранять избранных персонажей в локальное хранилище, анимирует добавлениe/удаление из избранного.
+
+## Билд и запуск
+
+- Скачать готовый билд на Android или Linux можно в [Релизах](https://github.com/vesnanervah/rick_and_morty/releases/tag/Release)
+- Запустить проект можно через GUI вашего IDE или командой:
+
+```bash
+flutter run
+```
+
+- Собрать проект можно командой:
+
+```bash
+flutter build
+```
+
+- Проект был собран на Flutter версии 3.35.5
+
+### Stack
+
+#### State management
+
+- Bloc и Flutter bloc для архитектуры
+- GetIt и Injectable для DI
+- Equatable для более эффективной работы с иммутабельными объектами
+
+#### Локальное хранилище
+
+- HiveCe для работы с локальными хранилищем
+- PathProvider для определения директории приложения на разных платформах
+- http_cache_hive_store для использования Hive в кешировании запросов
+
+#### Работа с сетью
+
+- Http для запросов к серверному API
+- http_cache_client и http_cache_core для кеширования запросов
