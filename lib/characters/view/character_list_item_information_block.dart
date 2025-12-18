@@ -14,8 +14,14 @@ class CharacterListItemInformationBlock extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(label, style: Theme.of(context).textTheme.bodySmall),
-      Text(value),
+      Text(
+        label,
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(height: 1.2),
+      ),
+      Text(
+        value,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.2),
+      ),
     ],
   );
 }

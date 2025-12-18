@@ -32,10 +32,12 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: PageView(
-      physics: const NeverScrollableScrollPhysics(),
-      controller: pageViewController,
-      children: [RemoteCharactersPage(), FavoriteCharactersPage()],
+    body: SafeArea(
+      child: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: pageViewController,
+        children: [RemoteCharactersPage(), FavoriteCharactersPage()],
+      ),
     ),
     bottomNavigationBar: BottomNavBar(
       selectedItem: selectedNavItem,

@@ -17,7 +17,7 @@ abstract class CharactersListItem extends StatelessWidget {
       child: Row(
         children: [
           AspectRatio(
-            aspectRatio: 4 / 4,
+            aspectRatio: MediaQuery.sizeOf(context).width > 380 ? 4 / 4 : 3 / 4,
             child: SafeImage(url: character.image),
           ),
           Flexible(

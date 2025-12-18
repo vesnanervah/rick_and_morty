@@ -18,15 +18,22 @@ class CharactersListItemHeader extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(name, style: Theme.of(context).textTheme.titleMedium),
+      Text(
+        name,
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(height: 1.25),
+      ),
+      const SizedBox(height: 2),
       Row(
         children: [
           CharacterStatusIndicator(status),
           const SizedBox(width: 4),
           Text(status.name),
-          if (species != null) Text('- $species'),
+          if (species != null && MediaQuery.sizeOf(context).width > 380)
+            Text('- $species'),
         ],
       ),
+      if (species != null && MediaQuery.sizeOf(context).width <= 380)
+        Text('$species'),
     ],
   );
 }

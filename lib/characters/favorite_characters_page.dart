@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/characters/block/characters_event.dart';
 import 'package:rick_and_morty/characters/block/characters_state.dart';
 import 'package:rick_and_morty/characters/block/favorite_characters_bloc.dart';
-
 import 'package:rick_and_morty/characters/view/favorite_characters_list.dart';
 
 class FavoriteCharactersPage extends StatelessWidget {
