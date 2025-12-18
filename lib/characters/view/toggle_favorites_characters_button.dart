@@ -13,6 +13,6 @@ class ToggleFavoritesCharactersButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => IconButton(
     onPressed: onTap,
-    icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+    icon: Icon(isFavorite ? Icons.star : Icons.star_outline),
   );
 }
