@@ -8,12 +8,14 @@ import 'package:rick_and_morty/characters/block/favorite_characters_bloc.dart';
 import 'package:rick_and_morty/characters/block/remote_characters_bloc.dart';
 import 'package:rick_and_morty/core/di/injection.dart';
 import 'package:rick_and_morty/core/view/home_layout.dart';
+import 'package:rick_and_morty/hive_registrar.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies(Environment.dev);
   final path = await getApplicationCacheDirectory();
   Hive.init(path.path);
+  Hive.registerAdapters();
 
   runApp(const MainApp());
 }

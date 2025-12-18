@@ -45,7 +45,7 @@ final class FavoriteCharactersBloc
                 : [...state.characters, event.character])
             .toList();
     try {
-      repo.putCharacters(mutatedList);
+      repo.putCharacter(event.character);
       emit(state.copyWith(characters: mutatedList));
     } catch (_) {}
   }
