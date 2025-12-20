@@ -9,11 +9,13 @@ import 'package:rick_and_morty/core/utils/event_transoftmer.dart';
 @Injectable()
 final class RemoteCharactersBloc
     extends CharactersBloc<RemoteCharactersState, RemoteCharacterRepo> {
-  RemoteCharactersBloc({required super.repo}) : super(RemoteCharactersState()) {
+  RemoteCharactersBloc({required super.repo})
+    : super(RemoteCharactersState(isFetchingMore: true)) {
     on<NeededNextCharacters>(
       onNeededNextCharacters,
-      transformer: debounceTransformer(const Duration(milliseconds: 200)),
+      transformer: debounceTransformer(const Duration(milliseconds: 400)),
     );
+    add(NeededNextCharacters());
   }
 
   Future<void> onNeededNextCharacters(

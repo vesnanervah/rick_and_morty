@@ -8,7 +8,8 @@ import 'package:rick_and_morty/characters/repository/favorite_character_repo.dar
 @Injectable()
 final class FavoriteCharactersBloc
     extends CharactersBloc<CharactersState, FavoriteCharacterRepo> {
-  FavoriteCharactersBloc({required super.repo}) : super(CharactersState()) {
+  FavoriteCharactersBloc({required super.repo})
+    : super(CharactersState(isFetchingMore: true)) {
     on<NeededNextCharacters>(onNeededNextCharacters);
     on<ToggleFavoriteCharacters>(onToggleFavoriteCharacters);
     add(NeededNextCharacters());
