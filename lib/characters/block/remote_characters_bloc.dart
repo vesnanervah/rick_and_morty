@@ -4,12 +4,16 @@ import 'package:rick_and_morty/characters/block/characters_bloc.dart';
 import 'package:rick_and_morty/characters/block/characters_event.dart';
 import 'package:rick_and_morty/characters/block/remote_characters_state.dart';
 import 'package:rick_and_morty/characters/repository/remote_character_repo.dart';
+import 'package:rick_and_morty/core/utils/event_transoftmer.dart';
 
 @Injectable()
 final class RemoteCharactersBloc
     extends CharactersBloc<RemoteCharactersState, RemoteCharacterRepo> {
   RemoteCharactersBloc({required super.repo}) : super(RemoteCharactersState()) {
-    on<NeededNextCharacters>(onNeededNextCharacters);
+    on<NeededNextCharacters>(
+      onNeededNextCharacters,
+      transformer: debounceTransformer(const Duration(milliseconds: 200)),
+    );
   }
 
   Future<void> onNeededNextCharacters(
