@@ -7,7 +7,7 @@
 
 ## Билд и запуск
 
-- Скачать готовый билд на Android или Linux можно в [Релизах](https://github.com/vesnanervah/rick_and_morty/releases/tag/Release)
+- Скачать готовый билд на Android или Linux можно в [Релизах](https://github.com/vesnanervah/rick_and_morty/releases)
 - Запустить проект можно через GUI вашего IDE или командой:
 
 ```bash
