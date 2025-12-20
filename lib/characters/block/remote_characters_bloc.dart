@@ -18,13 +18,13 @@ final class RemoteCharactersBloc
   ) async {
     emit(state.copyWith(isFetchingMore: true));
     try {
-      final nextPage = state.page + 1;
-      final res = await repo.fetchCharacters(page: nextPage);
+      final page = state.page + 1;
+      final res = await repo.fetchCharacters(page: page);
       emit(
         state.copyWith(
           characters: [...state.characters, ...res.characters],
-          page: nextPage,
-          hasMore: nextPage >= state.page,
+          page: page,
+          hasMore: res.pages > page,
           isFetchingMore: false,
         ),
       );
