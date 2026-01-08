@@ -11,7 +11,6 @@ class FavoriteCharactersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<FavoriteCharactersBloc, CharactersState>(
-        buildWhen: (previous, current) => previous != current,
         builder: (context, state) => FavoriteCharactersList(
           isLoading: state.isFetchingMore,
           characters: state.characters,

@@ -11,7 +11,6 @@ class RemoteCharactersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<RemoteCharactersBloc, RemoteCharactersState>(
-        buildWhen: (previous, current) => previous != current,
         builder: (context, state) => RemoteCharactersList(
           isLoading: state.isFetchingMore,
           characters: state.characters,
